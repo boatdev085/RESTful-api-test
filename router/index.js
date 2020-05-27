@@ -1,7 +1,14 @@
 const express = require("express");
-const models = express.Router();
-// models.use("/user", require("../api/user"));
-models.use("/email", require("../api/email"));
-models.use("/taxincome", require("../api/tax-income"));
+const fs = require("fs");
+const path = require("path");
+const router = express.Router();
+const appRoot = path.dirname(require.main.filename);
+fs.readdirSync(appRoot + "/api").forEach(function (route) {
+  const replaceNameRoute = route.replace(".js", "");
+  router.use(
+    "/" + replaceNameRoute,
+    require("../api/" + replaceNameRoute + ".js")
+  );
+});
 
-module.exports = models;
+module.exports = router;

@@ -1,26 +1,23 @@
 module.exports = (sequelize, Sequelize) => {
-  const Users = sequelize.define("user", {
-    user_id: {
+  const group = sequelize.define("group", {
+    group_id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
+    group_name: {
       type: Sequelize.STRING,
     },
-    firstName: {
+    group_description: {
       type: Sequelize.STRING,
     },
-    lastName: {
-      type: Sequelize.STRING,
-    },
-    email: {
-      type: Sequelize.STRING,
-    },
-    address_id: {
+    group_count: {
       type: Sequelize.INTEGER,
+    },
+    group_flag: {
+      type: Sequelize.BOOLEAN,
     },
   });
 
-  return Users;
+  return group;
 };

@@ -1,9 +1,10 @@
 module.exports = {
   HOST: "localhost",
-  USER: "root",
-  PASSWORD: "",
-  DB: "example_test",
-  dialect: "mysql",
+  USER: "sa",
+  PASSWORD: "test@MIN2020",
+  DB: "RESTful_api_test",
+  dialect: "mssql",
+  port: "1443",
   pool: {
     max: 5,
     min: 0,

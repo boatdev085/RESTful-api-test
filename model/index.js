@@ -3,8 +3,7 @@ const dbConfig = require("../config/db.config");
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
-  //   port: "3306",
-  dialect: "mysql",
+  dialect: dbConfig.dialect,
   operatorsAliases: false,
 
   pool: {
@@ -39,11 +38,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
-db.Users = require("./user.model")(sequelize, Sequelize);
-db.Address = require("./address.model")(sequelize, Sequelize);
-db.Province = require("./province.model")(sequelize, Sequelize);
-db.Khet = require("./khet.model")(sequelize, Sequelize);
-db.Khwang = require("./khwang.model")(sequelize, Sequelize);
+db.group = require("./group.model")(sequelize, Sequelize);
+db.contact = require("./contact.model")(sequelize, Sequelize);
 
 module.exports = db;
