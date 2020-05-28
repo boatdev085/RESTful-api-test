@@ -133,7 +133,6 @@ router.get("/contact/:id", async (req, res, next) => {
 });
 router.post("/contact", async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
     const {
       group_id,
       contact_first_name,

@@ -30,6 +30,7 @@ const updateGroup = async (params) => {
     {
       group_name: params.group_name,
       group_description: params.group_description,
+      group_count: params.group_count,
     },
     { where: { group_id: params.group_id } }
   );
@@ -57,6 +58,15 @@ const insertContact = async (params) => {
   const convertBirthday = params.contact_birthday
     ? moment(params.contact_birthday)
     : null;
+
+  let findGroup = await getGroupFindOne(params.group_id);
+
+  if (findGroup) {
+    await updateGroup({
+      group_id: params.group_id,
+      group_count: findGroup.group_count + 1,
+    });
+  }
   return await Contact.create({
     group_id: params.group_id,
     contact_first_name: params.contact_first_name,
