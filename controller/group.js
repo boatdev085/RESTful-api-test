@@ -94,7 +94,18 @@ const updateContact = async (params) => {
     { where: { contact_id: params.contact_id } }
   );
 };
-const deleteContact = async (id) => {
+const deleteContact = async (id, group_id) => {
+  let findContact = await getContactFindOne(id);
+  if (findContact) {
+    let findGroup = await getGroupFindOne(findContact.group_id);
+    if (findGroup) {
+      await updateGroup({
+        group_id: group_id,
+        group_count: findGroup.group_count - 1,
+      });
+    }
+  }
+
   return await Contact.destroy({
     where: { contact_id: id },
   });
